@@ -1,4 +1,3 @@
-# Operational research
 # Gas Supply Optimization
 
 ## Problem Description:
@@ -20,7 +19,7 @@ Supplier nodes are nodes that supply gas for the gas network. Each of these supp
 **Note**: Usage of every kilometer of pipeline incurs an additional charge of $0.01 per MJ.
 
 ## Problem Set:
-### Part 1 - Linear Programming
+## Part 1 - Linear Programming
 (My solution implementation can be found in `.\src\problem_1_3.py` file.)
 
 ### Problem 1:
@@ -33,7 +32,7 @@ Using the data from **nodes2.csv**, which provides forecasted daily demands for 
 Given the gas's compressibility, pipelines can function as a gas storage containers by accommodating daily flow imbalances. This flexibility means pipelines can exhibit temporary deficits or surpluses in their daily flow. Such imbalances attract a cost of $0.10 per MJ. However, these imbalances might enable more cost-efficient utilization of the available supply on days. 
 Over the two weeks, a net-zero imbalance is required, ensuring the cumulative inflow aligns with the cumulative outflow for every pipeline (in 2 weeks). Incorporating these variables, deduce the optimal cost for meeting the forecast demand over the next two weeks period.
 
-### Part 2 - Integer Programming
+## Part 2 - Integer Programming
 (My solution implementation can be found in `.\src\problem_4_7.py` file.)
 ### Introduction:
 
