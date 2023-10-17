@@ -24,7 +24,7 @@ distances = np.linalg.norm(START_NODES_XY - END_NODES_XY, axis=1)
 distances = distances.reshape(-1)
 
 # Create Gurobi model and variables
-m = gb.Model("a1")
+m = gb.Model()
 X: MVar = m.addMVar((E,))  # Decision variable for the amount of flow between nodes
 Y: MVar = m.addMVar((N,))  # Decision variable for the generation amount at each node
 

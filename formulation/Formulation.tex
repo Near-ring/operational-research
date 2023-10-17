@@ -67,9 +67,9 @@
 	\subsection*{Objective}
 		\begin{align*}
 		&\min(  \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)\\
-		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{20}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{20}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\
-		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{21}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{21}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\
-		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{22}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{22}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7)) \\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{20}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) +  \sum_{i \in E} (p^{20}_i \cdot \text{distances}_{i} \cdot 200000) \\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{21}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) +  \sum_{i \in E} (p^{21}_i \cdot \text{distances}_{i} \cdot 200000) \\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{22}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) +  \sum_{i \in E} (p^{22}_i \cdot \text{distances}_{i} \cdot 200000)) \\
 		\end{align*}
 	  
 
@@ -108,13 +108,6 @@
 		\sum_{k \in start(i)} X^{21}_{k} + demand^{2}_{i} &&\forall i\in \mathcal{NG} \\
 		\sum_{k \in end(i)} X^{22}_{k} =
 		\sum_{k \in start(i)} X^{22}_{k} + 1.2 \cdot demand^{2}_{i} &&\forall i\in \mathcal{NG} \\
-		\intertext{Communication 10 constraints:}
-		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{20}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{20}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\ \leq
-		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{1} \\
-		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{21}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{21}_i \cdot \text{distances}_{i,j} \cdot 200000 \cdot 0.7) \\ \leq
-		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{2}\\
-		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{22}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{22}_i \cdot \text{distances}_{i,j} \cdot 200000 \cdot 0.7) \\ \leq
-		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{3}
 	\end{align*}
 
 \end{document}
