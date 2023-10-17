@@ -1,0 +1,122 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb,fullpage}
+\usepackage{dsfont}
+\usepackage{setspace}
+\title{Problem 4-6 Formulation}
+\setlength\parindent{0pt}
+\doublespacing
+\begin{document}
+	\maketitle
+	\subsection*{Sets}
+	\begin{tabular}{rl} 
+		N & Set of nodes $N \subseteq $N \\
+		E & Set of pipelines (edges) between two nodes  \\
+		G & Set of generator/supplier nodes, $G\subseteq N$ \\
+
+	\end{tabular}
+
+
+	\subsection*{Data}
+	
+	\begin{tabular}{rl}
+		$\mathcal{G}$ & the set of index of nodes that is a supplier node\\
+		$\mathcal{NG}$ & the set of index of nodes that is not supplier nodes\\
+		$demand$ & The demand of each nodes\\
+		& the $demand^1$ represents the demand in the 5th year\\
+		& the $demand^2$ represents the demand in the 10th year\\
+		$distances_i$ & Length of an edge of pipeline i \\
+		$init\_capacity_i$  & The initial capcity of $generator_i \subseteq G$  \\
+		$add\_capacity_{i,j}$  & The additional capcity of $generator_i  \subseteq G$ \\
+		& with choosing the upgrade option j, $i \in \{1,2,3,4\}$,$j \in \{1,2,3\}$\\
+		$upgrade\_cost_{i,j}$  & The cost of upgrade of $generator_i  \subseteq G$ \\
+		& with choosing the upgrade option j, $i \in \{1,2,3,4\}$,$j \in \{1,2,3\}$\\
+		end(i) & index of pipelines that ends with node i\\
+		start(i) & index of pipelines that starts with node i\\
+	
+	\end{tabular}
+
+	
+
+	\subsection*{Variables}
+	
+	\begin{tabular}{rl}
+		$X^1_{i} $ &  The amount of flow in pipeline$_i\in E$ in 5th year \\
+		$X^{20}_{i} $ &  The amount of flow in pipeline$_i\in E$ in 10th year and the demand is 80\% of original\\
+		$X^{21}_{i} $ &  The amount of flow in pipeline$_i\in E$ in 10th year and the demand is original\\
+		$X^{22}_{i} $ &  The amount of flow in pipeline$_i\in E$ in 10th year and the demand is 120\% of original\\
+		$Y^1_{i} $ &  The amount of generation of supplier$_i\in G$ in 5th year, $i\in \{1,2,3,4\}$ \\
+		$Y^{20}_{i} $ &  The amount of generation of supplier$_i\in G$ in 10th year and the demand is 80\% of original \\
+		$Y^{21}_{i} $ &  The amount of generation of supplier$_i\in G$ in 10th year and the demand is original \\
+		$Y^{22}_{i} $ &  The amount of generation of supplier$_i\in G$ in 10th year and the demand is 120\% of original\\
+		$b^1_{i,j} \in $ \{0,1\}  $ $ & A binary variable represents the choice of upgrade option j for generator i, (1: upgrade, 0: no upgrade)\\
+		&$i\in\{1,2,3,4\}$ number index of the generator\\
+		&$j\in\{1,2,3\}$ index of option to upgrade\\
+		$b^{20}_{i,j} \in $ \{0,1\}  $ $ & option choose in second 5 years period(10th) year and the demand is 80\% of original\\
+		$b^{21}_{i,j} \in $ \{0,1\}  $ $ & option choose in 10th year and the demand is original\\
+		$b^{22}_{i,j} \in $ \{0,1\}  $ $ & option choose in 10th year and the demand is 120\% of original\\
+
+		$p^1_i \in $ \{0,1\}  $ $ &  A binary variable indicates upgrade of pipelines i in the 0-5 year (1: upgrade, 0: no upgrade)\\
+		$p^{20}_i \in $ \{0,1\}  $ $ &  A binary variable indicates upgrade pipelines in the 5-10 year and demand is 80\% of original \\
+		$p^{21}_i \in $ \{0,1\}  $ $ &  A binary variable indicates upgrade pipelines in the 5-10 year and demand is original \\
+		$p^{22}_i \in $ \{0,1\}  $ $ &  A binary variable indicates upgrade pipelines in the 5-10 year and demand is 120\% of original\\
+
+	\end{tabular}
+	
+	
+	\subsection*{Objective}
+		(Note: if no discount, just remove the 0.7 in below equation)
+		\begin{align*}
+		&\min(  \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)\\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{20}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{20}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{21}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{21}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\
+		&+ 1/3 \cdot \sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{22}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{22}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7)) \\
+		\end{align*}
+	  
+
+	\subsection*{Constraints}
+	\begin{align*}
+		\intertext{Choice constraints:}
+		p^1_i +p^{20}_i  \leq 1 && \forall i\in E\\
+		p^1_i +p^{21}_i  \leq 1 && \forall i\in E\\
+		p^1_i +p^{22}_i  \leq 1 && \forall i\in E\\
+		\sum_{j = 1}^{3} b^1_{i,j} + \sum_{j = 1}^{3} b^{20}_{i,j} \leq 1 && \forall i \in \{1,2,3,4\} \\
+		\sum_{j = 1}^{3} b^1_{i,j} + \sum_{j = 1}^{3} b^{21}_{i,j} \leq 1 && \forall i \in \{1,2,3,4\} \\
+		\sum_{j = 1}^{3} b^1_{i,j} + \sum_{j = 1}^{3} b^{22}_{i,j} \leq 1 && \forall i \in \{1,2,3,4\} \\
+		\intertext{Capacity constraints:}
+		X^1_i \leq (p^1_i + 1)\cdot 280 && \forall i\in E\\
+		X^{20}_i \leq (p^{20}_i + 1)\cdot 280 && \forall i\in E\\
+		X^{21}_i \leq (p^{21}_i + 1)\cdot 280 && \forall i\in E\\
+		X^{22}_i \leq (p^{22}_i + 1)\cdot 280 && \forall i\in E\\
+		Y^1_k \leq \sum_{j = 1}^{3} b^1_{i,j} \cdot add\_capacity_{i,j} + init\_capacity_i  && \forall (k,i) \in \mathcal{G} \times \{1,2,3,4\}\\
+		Y^{20}_k \leq \sum_{j = 1}^{3} b^{20}_{i,j} \cdot add\_capacity_{i,j}+\sum_{j = 1}^{3} b^1_{i,j} \cdot add\_capacity_{i,j} + init\_capacity_i  && \forall (k,i) \in \mathcal{G} \times \{1,2,3,4\}  \\
+		Y^{21}_k \leq \sum_{j = 1}^{3} b^{21}_{i,j} \cdot add\_capacity_{i,j}+\sum_{j = 1}^{3} b^1_{i,j} \cdot add\_capacity_{i,j} + init\_capacity_i  && \forall (k,i) \in \mathcal{G} \times \{1,2,3,4\} \\
+		Y^{22}_k \leq \sum_{j = 1}^{3} b^{22}_{i,j} \cdot add\_capacity_{i,j}+\sum_{j = 1}^{3} b^1_{i,j} \cdot add\_capacity_{i,j} + init\_capacity_i  && \forall (k,i) \in \mathcal{G} \times \{1,2,3,4\} \\
+		\intertext{Flow Constraints on supplier nodes:}\\ Y^1_i + \sum_{k \in end(i)} X^{1}_{k} =
+		\sum_{k \in start(i)} X^{1}_{k} + demand^{1}_{i} &&\forall i\in \mathcal{G} \\
+		Y^{20}_i + \sum_{k \in end(i)} X^{20}_{k} =
+		\sum_{k \in start(i)} X^{20}_{k} + 0.8 \cdot demand^{2}_{i} &&\forall i\in \mathcal{G} \\
+		Y^{21}_i + \sum_{k \in end(i)} X^{21}_{k} =
+		\sum_{k \in start(i)} X^{21}_{k} + demand^{2}_{i} &&\forall i\in \mathcal{G} \\
+		Y^{22}_i + \sum_{k \in end(i)} X^{22}_{k} =
+		\sum_{k \in start(i)} X^{22}_{k} + 1.2 \cdot demand^{2}_{i} &&\forall i\in \mathcal{G} \\
+		\intertext{Flow Constraints on non-supplier nodes:}\\ 
+		\sum_{k \in end(i)} X^{1}_{k} =
+		\sum_{k \in start(i)} X^{1}_{k} + demand^{1}_{i} &&\forall i\in \mathcal{NG} \\
+		\sum_{k \in end(i)} X^{20}_{k} =
+		\sum_{k \in start(i)} X^{20}_{k} + 0.8 \cdot demand^{2}_{i} &&\forall i\in \mathcal{NG} \\
+		\sum_{k \in end(i)} X^{21}_{k} =
+		\sum_{k \in start(i)} X^{21}_{k} + demand^{2}_{i} &&\forall i\in \mathcal{NG} \\
+		\sum_{k \in end(i)} X^{22}_{k} =
+		\sum_{k \in start(i)} X^{22}_{k} + 1.2 \cdot demand^{2}_{i} &&\forall i\in \mathcal{NG} \\
+		\intertext{Communication 10 constraints:}
+		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{20}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{20}_i \cdot \text{distances}_{i} \cdot 200000 \cdot 0.7) \\ \leq
+		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{1} \\
+		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{21}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{21}_i \cdot \text{distances}_{i,j} \cdot 200000 \cdot 0.7) \\ \leq
+		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{2}\\
+		\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{22}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) \cdot 0.7 +  \sum_{i \in E} (p^{22}_i \cdot \text{distances}_{i,j} \cdot 200000 \cdot 0.7) \\ \leq
+		2(\sum_{i = 1}^{4} \sum_{j = 1}^{3} (b^{1}_{i,j}  \cdot \text{upgrade\_cost}_{i,j}) + \sum_{i \in E} (p^{1}_i \cdot \text{distances}_{i} \cdot 200000)) \tag{3}
+	\end{align*}
+
+\end{document}
+
